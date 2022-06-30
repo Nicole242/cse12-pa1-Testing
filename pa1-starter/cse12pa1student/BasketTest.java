@@ -44,7 +44,9 @@ public class BasketTest {
 		}
 		return null;
 	}
-	/*
+	
+
+	
 	@Test
 	public void addedHasCount1() {
 		Basket basketToTest = makeBasket();
@@ -62,7 +64,6 @@ public class BasketTest {
 		Item i = new Item("Shampoo", 5);
 		Item j = new Item("Ziploc Bags", 3);
 		Item k = j;
-		//Item k = new Item("Ziploc Bags", 3);
 		Item l = new Item("Detergent", 7);
 		basketToTest.addToBasket(i);
 		basketToTest.addToBasket(j);
@@ -123,9 +124,8 @@ public class BasketTest {
 
 	}
 
-
 	@Test 
-	public void checkWhatsinBasket(){
+	public void checkRemoveFromBasket(){
 
 		Basket basketToTest = makeBasket();
 		Item a = new Item("Coffee", 4);
@@ -135,17 +135,203 @@ public class BasketTest {
 		basketToTest.addToBasket(j);
 		basketToTest.addToBasket(k);
 
-		basketToTest.removeFromBasket(j);
 
-		assertEquals(false, basketToTest.removeAllFromBasket(k));
+		assertEquals(true, basketToTest.removeFromBasket(j));
+
+	}
+
+	@Test 
+	public void checkRemoveFromBasket2(){
+
+		Basket basketToTest = makeBasket();
+		Item a = new Item("Coffee", 4);
+		Item j = new Item("Ziploc Bags", 3);
+		
+		basketToTest.addToBasket(a);
+		basketToTest.addToBasket(j);
+
+		assertEquals(true, basketToTest.removeFromBasket(j));
 
 
 
 	}
-	*/
+
+
+	
+	@Test 
+	public void checkRemoveAllFromBasket(){
+
+		Basket basketToTest = makeBasket();
+		Item a = new Item("Coffee", 4);
+		Item j = new Item("Ziploc Bags", 3);
+		Item k = new Item("Ziploc Bags", 3);
+		basketToTest.addToBasket(a);
+		basketToTest.addToBasket(j);
+		basketToTest.addToBasket(k);
+
+		assertEquals(true, basketToTest.removeAllFromBasket(j));
+
+
+	}
+
+
+	@Test 
+	public void checkRemoveAllCopiesFromBasket(){
+
+		Basket basketToTest = makeBasket();
+		Item a = new Item("Coffee", 4);
+		Item j = new Item("Ziploc Bags", 3);
+		Item k = j;
+		basketToTest.addToBasket(a);
+		basketToTest.addToBasket(j);
+		basketToTest.addToBasket(k);
+		basketToTest.removeAllFromBasket(j);
+
+
+		assertEquals(0, basketToTest.countItem(j));
+
+	}
+
+	
+	@Test 
+	public void countDuplicates(){
+
+		Basket basketToTest = makeBasket();
+		Item a = new Item("Coffee", 4);
+		Item j = new Item("Ziploc Bags", 3);
+		Item k = new Item("Ziploc Bags", 3);
+		basketToTest.addToBasket(a);
+		basketToTest.addToBasket(j);
+		basketToTest.addToBasket(k);
+
+
+		assertEquals(3, basketToTest.count());
+
+	}
+
+	
+
+	@Test 
+	public void removeAtBeginning(){
+
+		Basket basketToTest = makeBasket();
+		Item a = new Item("Coffee", 4);
+		Item j = new Item("Ziploc Bags", 3);
+		Item k = new Item("Ziploc Bags", 3);
+		basketToTest.addToBasket(a);
+		basketToTest.addToBasket(j);
+		basketToTest.addToBasket(k);
+		
+		basketToTest.removeFromBasket(a);
+
+		assertEquals(false, basketToTest.removeFromBasket(a));
+
+
+	}
+
+
+	@Test 
+	public void addNull(){
+
+		Basket basketToTest = makeBasket();
+		
+		Item a = null;
+		Item j = null;
+		Item k = null;
+		basketToTest.addToBasket(a);
+		basketToTest.addToBasket(j);
+		basketToTest.addToBasket(k);
+		
+
+		assertEquals(3, basketToTest.count());
+		
+
+	}
+
+	
+	@Test 
+	public void removeNull(){
+
+		Basket basketToTest = makeBasket();
+		Item a = null;
+		Item j = null;
+		Item k = null;
+		basketToTest.addToBasket(a);
+		basketToTest.addToBasket(j);
+		basketToTest.addToBasket(k);
+
+		assertEquals(true, basketToTest.removeFromBasket(a));
+		
+		
+
+	}
+	
+
+	@Test 
+	public void removeAtOne(){
+
+		Basket basketToTest = makeBasket();
+		Item a = new Item("Coffee", 4);
+		Item j = new Item("Ziploc Bags", 3);
+		Item k = new Item("Peanut Butter", 5);
+		basketToTest.addToBasket(a);
+		basketToTest.addToBasket(j);
+		basketToTest.addToBasket(k);
+		
+		basketToTest.removeFromBasket(j);
+
+		assertEquals(false, basketToTest.removeFromBasket(j));
+
+
+	}
+
+	
+	@Test
+	public void removeAllOfOne(){
+		Basket basketToTest = makeBasket();
+		Item a = new Item("Coffee", 4);
+		Item j = new Item("Ziploc Bags", 3);
+		Item k = new Item("Peanut Butter", 2);
+		basketToTest.addToBasket(a);
+		basketToTest.addToBasket(j);
+		basketToTest.addToBasket(k);
+
+		basketToTest.removeAllFromBasket(j);
+
+		assertEquals(2, basketToTest.count());
+
+
+
+	}
+
 
 	@Test
-	public static void
+	public void checkCountItem(){
+		Basket basketToTest = makeBasket();
+		Item a = new Item("Vaccum", 140);
+		Item j = new Item("Ziploc Bags", 7);
+		Item k = new Item("Peanut Butter", 2);
+		Item l = new Item("Water", 1);
+		Item m = j;
+		Item n = new Item("Ziploc Bags", 7);
+		basketToTest.addToBasket(a);
+		basketToTest.addToBasket(j);
+		basketToTest.addToBasket(k);
+		basketToTest.addToBasket(l);
+		basketToTest.addToBasket(m);
+		basketToTest.addToBasket(n);
+	
+		assertEquals(3, basketToTest.countItem(m));
+
+
+
+	}
+
+
+
+	
+	
+
 
 
 }
